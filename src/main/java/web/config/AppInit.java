@@ -4,10 +4,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    static {
-
-    }
-
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;

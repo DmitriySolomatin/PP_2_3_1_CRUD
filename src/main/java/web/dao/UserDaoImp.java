@@ -7,19 +7,16 @@ import web.model.User;
 import web.service.UserService;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.TransactionManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserDaoImp implements UserDao {
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
-
-    UserDaoImp(){
-        entityManager.persist(new User("Tony", "Stark", 50));
-        entityManager.persist(new User("Thor", "Odinson", 1500));
-        entityManager.persist(new User("Steven", "Rogers", 92));
-    }
 
     public User getUserById(long id) {
         return entityManager.find(User.class, id);
@@ -29,15 +26,22 @@ public class UserDaoImp implements UserDao {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
+    @Transactional
     public void deleteUser(long id) {
-
+        entityManager.remove(getUserById(id));
     }
 
-    public void deleteUser(User user) {
-        entityManager.remove(user);
-    }
-
+    @Transactional
     public void addUser(User user) {
         entityManager.persist(user);
+    }
+
+    @Transactional
+    public void updateUser(User user) {
+        //Не пойму как тут реализовать без сеттеров, persist(user) не работает
+        User needUpdate = entityManager.find(User.class, user.getId());
+        needUpdate.setName(user.getName());
+        needUpdate.setLastName(user.getLastName());
+        needUpdate.setAge(user.getAge());
     }
 }

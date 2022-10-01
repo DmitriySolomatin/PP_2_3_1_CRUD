@@ -5,14 +5,24 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
+        body {
+            max-width: 700px;
+        }
+
         td {
             border: 1px solid black;
             padding: 5px;
         }
+
+        form, label {
+            display: flex;
+            flex-direction: column;
+        }
+
     </style>
 </head>
 <body>
-<div>
+<div th:if="${users}">
     <table>
         <thead>
         <tr>
@@ -20,6 +30,8 @@
             <td>name</td>
             <td>lastName</td>
             <td>age</td>
+            <td>edit</td>
+            <td>delete</td>
         </tr>
         </thead>
         <tbody>
@@ -28,9 +40,49 @@
             <td th:text="${user.name}"></td>
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.age}"></td>
+            <td><a th:href="@{/edit/__${user.id}__/}">Редактировать</a></td>
+            <td><a th:href="@{/delete/__${user.id}__/}">Удалить</a></td>
         </tr>
         </tbody>
     </table>
+</div>
+<div th:if="${user_for_edit}">
+    <form th:action="@{/edit}" th:object="${user_for_edit}" th:method="post">
+        <div>
+            <label>Имя:
+                <input type="text" th:field="*{name}">
+            </label>
+            <label>Фамилия:
+                <input type="text" th:field="*{lastName}">
+            </label>
+            <label>Возраст:
+                <input type="text" th:field="*{age}">
+            </label>
+            <input type="hidden" th:field="*{id}">
+        </div>
+        <div>
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+</div>
+<div th:if="${user_model}">
+    <form th:action="@{/add}" th:object="${user_model}" th:method="post">
+        <div>
+            <label>Имя:
+                <input type="text" th:field="*{name}">
+            </label>
+            <label>Фамилия:
+                <input type="text" th:field="*{lastName}">
+            </label>
+            <label>Возраст:
+                <input type="text" th:field="*{age}">
+            </label>
+            <input type="hidden" th:field="*{id}">
+        </div>
+        <div>
+            <button type="submit">Добавить</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>
