@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
-@Transactional
 public class UserDaoImp implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
