@@ -33,10 +33,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private Environment env;
-    private final ApplicationContext applicationContext;
 
-    public WebConfig(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
+    public WebConfig() {
     }
 
     @Bean
@@ -84,7 +82,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
         templateResolver.setCharacterEncoding("UTF-8");
