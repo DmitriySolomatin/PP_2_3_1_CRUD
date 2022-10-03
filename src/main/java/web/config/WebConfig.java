@@ -31,10 +31,12 @@ import java.util.Properties;
 @PropertySource("classpath:dp.properties")
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private Environment env;
 
-    public WebConfig() {
+    private final Environment env;
+
+    @Autowired
+    public WebConfig(Environment env) {
+        this.env = env;
     }
 
     @Bean
