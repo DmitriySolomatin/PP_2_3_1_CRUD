@@ -22,8 +22,7 @@ public class UserController {
 
     @GetMapping(value = "/")
     public String printUsers(ModelMap model, @RequestParam("count") Optional<Integer> count) {
-        List<User> users = userService.getUserList(count.orElse(100));
-        model.addAttribute("users", users);
+        model.addAttribute("users", userService.getUserList(count.orElse(100)));
         model.addAttribute("user_model", new User());
         return "index";
     }
@@ -31,8 +30,7 @@ public class UserController {
     @GetMapping(value = "/delete/{id}")
     public String deleteUser(ModelMap model, @PathVariable long id) {
         userService.deleteUser(id);
-        List<User> users = userService.getUserList(100);
-        model.addAttribute("users", users);
+        model.addAttribute("users", userService.getUserList(100));
         model.addAttribute("user_model", new User());
         return "index";
     }
@@ -40,8 +38,7 @@ public class UserController {
     @PostMapping(value = "/add")
     public String addUser(ModelMap model, @ModelAttribute User user) {
         userService.addUser(user);
-        List<User> users = userService.getUserList(100);
-        model.addAttribute("users", users);
+        model.addAttribute("users", userService.getUserList(100));
         model.addAttribute("user_model", new User());
         return "index";
     }
@@ -55,8 +52,7 @@ public class UserController {
     @PostMapping(value = "/edit")
     public String editUser(ModelMap model, @ModelAttribute User user) {
         userService.updateUser(user);
-        List<User> users = userService.getUserList(100);
-        model.addAttribute("users", users);
+        model.addAttribute("users", userService.getUserList(100));
         model.addAttribute("user_model", new User());
         return "index";
     }
