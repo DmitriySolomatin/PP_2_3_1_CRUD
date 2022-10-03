@@ -25,17 +25,14 @@ public class UserDaoImp implements UserDao {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
-    @Transactional
     public void deleteUser(long id) {
         entityManager.remove(getUserById(id));
     }
 
-    @Transactional
     public void addUser(User user) {
         entityManager.persist(user);
     }
 
-    @Transactional
     public void updateUser(User user) {
         //Не пойму как тут реализовать без сеттеров, persist(user) не работает
         User needUpdate = entityManager.find(User.class, user.getId());
