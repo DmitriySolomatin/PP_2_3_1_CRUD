@@ -1,7 +1,6 @@
 package web.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class User {
@@ -12,7 +11,7 @@ public class User {
     @Column
     private String name;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 
     @Column

@@ -57,5 +57,10 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping(value = "/test")
+    public String testMethod() {
+        return "index";
+    }
+
 
 }
